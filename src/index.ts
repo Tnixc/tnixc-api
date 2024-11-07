@@ -1,16 +1,17 @@
-import { Elysia } from 'elysia';
 import dotenv from 'dotenv';
 import env from './env';
-import appRoute from './routes';
+import { createElysia } from './utils/elysia';
+import { fixCtxRequest } from './utils/fixCtxRequest';
+import { app } from './app';
 
 dotenv.config();
 
-const app = new Elysia().use(appRoute);
+const server = createElysia()
+  .derive((ctx) => fixCtxRequest(ctx.request))
+  .use(app);
 
-const port = env.PORT || 3000;
+server.listen({ port: env.PORT }, ({ hostname, port }) => {
+  const url = env.NODE_ENV === 'production' ? 'https' : 'http';
 
-app.listen(port);
-
-console.log(
-  `🦊 Elysia is running at http://${app.server?.hostname}:${app.server?.port}`
-);
+  console.log(`🦊 Elysia is running at ${url}://${hostname}:${port}`);
+});

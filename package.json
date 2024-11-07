@@ -8,7 +8,7 @@
     "vercel:dev": "bun run build && vercel dev",
     "start": "bun run ./dist/src/index.js",
     "typecheck": "tsc --noEmit",
-    "build": "tsc && tsc-alias"
+    "build": "bun scripts/transform-paths.ts"
   },
   "dependencies": {
     "dotenv": "^16.4.5",
