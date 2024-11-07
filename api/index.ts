@@ -4,7 +4,7 @@
 
 // import '../src/env.ts';
 
-import { app } from '../src/app';
+import { app } from '../src/app/index';
 
 // export const config = { runtime: 'edge' };
 export const runtime = 'edge';
