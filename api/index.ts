@@ -1,6 +1,6 @@
 // eslint-disable-next-line ts/ban-ts-comment
 // eslint-disable-next-line antfu/no-import-dist
-import '../src/env';
+// import '../src/env';
 
 import { app } from '../src/app';
 
