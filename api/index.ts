@@ -6,6 +6,22 @@ import { app } from '../dist/src/app.js';
 // export const config = { runtime: 'edge' };
 export const runtime = 'edge';
 
-export default async function handler(request: Request) {
+export const GET = async (request: Request) => {
   return app.fetch(request);
-}
+};
+
+export const POST = async (request: Request) => {
+  return app.fetch(request);
+};
+
+export const PUT = async (request: Request) => {
+  return app.fetch(request);
+};
+
+export const DELETE = async (request: Request) => {
+  return app.fetch(request);
+};
+
+export const PATCH = async (request: Request) => {
+  return app.fetch(request);
+};
