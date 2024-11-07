@@ -18,14 +18,14 @@ export const fixCtxRequest = (request: Request) => {
     body: request.body,
     headers: request.headers,
     method: request.method,
-    cache: request.cache,
+    // cache: request.cache,
     credentials: request.credentials,
     integrity: request.integrity,
     keepalive: request.keepalive,
     mode: request.mode,
     redirect: request.redirect,
-    referrer: request.referrer,
-    referrerPolicy: request.referrerPolicy,
+    referrer: (request as any).referrer,
+    referrerPolicy: request.referrerPolicy as any,
     signal: request.signal,
   });
 
