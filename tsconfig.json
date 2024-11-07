@@ -43,6 +43,7 @@
     "composite": true,
 
     /* Output Formatting */
+    "outDir": "./dist",
 
     /* Completeness */
     "skipLibCheck": true

@@ -1,4 +1,4 @@
-import { okResponse } from '@/utils/response';
+import { okResponse } from '../utils/response';
 import { Context } from 'elysia';
 
 export async function getAllUser(c: Context) {

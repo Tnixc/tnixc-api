@@ -1,5 +1,5 @@
-import env from '@/env';
-import { okResponse } from '@/utils/response';
+import env from '../env';
+import { okResponse } from '../utils/response';
 import { Context } from 'elysia';
 
 export async function getAppDetail(c: Context) {

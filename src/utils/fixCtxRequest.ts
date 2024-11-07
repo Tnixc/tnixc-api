@@ -1,4 +1,4 @@
-import env from '@/env';
+import env from '../env';
 
 /**
  * Bun's request.url is always http:// even if the request is sent with HTTPS

@@ -27,6 +27,5 @@
     "tsx": "^4.19.2",
     "typescript": "^5.6.3",
     "vercel": "^37.14.0"
-  },
-  "module": "src/index.js"
+  }
 }

@@ -1,4 +1,4 @@
-import { createElysia } from '@/utils/elysia';
+import { createElysia } from './utils/elysia';
 import { okResponse } from './utils/response';
 import appRoute from './routes';
 
