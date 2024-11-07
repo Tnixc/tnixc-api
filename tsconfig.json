@@ -1,28 +1,55 @@
 {
   "compilerOptions": {
-    "baseUrl": "./",
+    /* Type Checking */
+    "noUncheckedIndexedAccess": true, // Increases type-safety
+    "strict": true,
+
+    /* Modules */
+    "allowImportingTsExtensions": true,
     "module": "ESNext",
     "moduleResolution": "Bundler",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"] // Alias for absolute imports
     },
-    "jsx": "react-jsx",
-    "jsxImportSource": "hono/jsx",
-    "types": ["bun-types"],
+    "resolveJsonModule": true,
+    "types": ["bun-types"], // add Bun global
+
+    /* Emit */
+    "downlevelIteration": true,
+    "noEmit": true,
+
+    /* JavaScript Support */
+    "allowJs": true,
+
+    /* Editor Support */
+
+    /* Interop Constraints */
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+
+    /* Backwards Compatibility */
+
+    /* Language and Environment */
+    "jsx": "react",
+    "jsxFactory": "ElysiaJSX",
+    "jsxFragmentFactory": "ElysiaJSX.Fragment",
     "lib": ["ESNext"],
     "moduleDetection": "force",
     "target": "ESNext",
-    "allowJs": true,
-    "outDir": "./dist",
-    "typeRoots": ["./node_modules/@types"],
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "allowSyntheticDefaultImports": true,
-    "allowImportingTsExtensions": true,
-    "noEmit": true,
-    "noUncheckedIndexedAccess": true,
-    "strict": true,
+
+    /* Compiler Diagnostics */
+
+    /* Projects */
+    "composite": true,
+
+    /* Output Formatting */
+
+    /* Completeness */
     "skipLibCheck": true
+
+    /* Command Line */
+
+    /* Watch Options */
   },
   "tsc-alias": {
     "resolveFullPaths": true
