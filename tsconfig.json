@@ -1,56 +1,18 @@
 {
   "compilerOptions": {
-    /* Type Checking */
-    "noUncheckedIndexedAccess": true, // Increases type-safety
     "strict": true,
-
-    /* Modules */
-    "allowImportingTsExtensions": true,
+    "jsx": "react-jsx",
+    "jsxImportSource": "hono/jsx",
+    "baseUrl": "./",
     "module": "ESNext",
     "moduleResolution": "Bundler",
     "paths": {
-      "@/*": ["./src/*"] // Alias for absolute imports
+      "@/*": ["./src/*"]
     },
-    "resolveJsonModule": true,
-    "types": ["bun-types"], // add Bun global
-
-    /* Emit */
-    "downlevelIteration": true,
-    "noEmit": true,
-
-    /* JavaScript Support */
-    "allowJs": true,
-
-    /* Editor Support */
-
-    /* Interop Constraints */
-    "allowSyntheticDefaultImports": true,
-    "forceConsistentCasingInFileNames": true,
-
-    /* Backwards Compatibility */
-
-    /* Language and Environment */
-    "jsx": "react",
-    "jsxFactory": "ElysiaJSX",
-    "jsxFragmentFactory": "ElysiaJSX.Fragment",
-    "lib": ["ESNext"],
-    "moduleDetection": "force",
-    "target": "ESNext",
-
-    /* Compiler Diagnostics */
-
-    /* Projects */
-    "composite": true,
-
-    /* Output Formatting */
+    "typeRoots": ["./node_modules/@types"],
+    "types": ["node"],
     "outDir": "./dist",
-
-    /* Completeness */
     "skipLibCheck": true
-
-    /* Command Line */
-
-    /* Watch Options */
   },
   "tsc-alias": {
     "resolveFullPaths": true
