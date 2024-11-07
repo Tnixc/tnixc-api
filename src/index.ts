@@ -7,7 +7,7 @@ import { app } from './app';
 dotenv.config();
 
 const server = createElysia()
-  // .derive((ctx) => fixCtxRequest(ctx.request))
+  .derive((ctx) => fixCtxRequest(ctx.request))
   .use(app);
 
 server.listen({ port: env.PORT }, ({ hostname, port }) => {
