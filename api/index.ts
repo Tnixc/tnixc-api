@@ -1,8 +1,8 @@
 // eslint-disable-next-line ts/ban-ts-comment
 // eslint-disable-next-line antfu/no-import-dist
-import '@/env';
+import '../src/env';
 
-import { app } from '@/app';
+import { app } from '../src/app';
 
 export const config = { runtime: 'edge' };
 
