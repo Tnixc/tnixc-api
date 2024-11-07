@@ -1,6 +1,6 @@
-import { createElysia } from './utils/elysia';
-import { okResponse } from './utils/response';
-import appRoute from './routes';
+import appRoute from '@/routes';
+import { createElysia } from '@/utils/elysia';
+import { okResponse } from '@/utils/response';
 
 export const app = createElysia()
   .use(appRoute)
