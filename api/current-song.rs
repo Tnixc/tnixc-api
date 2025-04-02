@@ -17,7 +17,7 @@ async fn main() -> Result<(), Error> {
     run(handler).await
 }
 
-pub async fn handler(_req: Request) -> Result<Response<Body>, Error> {
+pub async fn handler(req: Request) -> Result<Response<Body>, Error> {
     let api_key = match env::var("LAST_FM_API_KEY") {
         Ok(val) => val,
         Err(e) => {
@@ -25,6 +25,22 @@ pub async fn handler(_req: Request) -> Result<Response<Body>, Error> {
             process::exit(1)
         }
     };
+
+    // Get origin from request headers
+    let origin = req
+        .headers()
+        .get("origin")
+        .and_then(|h| h.to_str().ok())
+        .unwrap_or("");
+
+    // Check if origin is allowed
+    let allowed_origin =
+        if origin.ends_with(".tnixc.space") || origin.starts_with("http://localhost") {
+            origin
+        } else {
+            // Default to deny if not from allowed origins
+            ""
+        };
 
     let song = current_song("Tnixc", &api_key).await;
     let out = match song {
@@ -35,12 +51,27 @@ pub async fn handler(_req: Request) -> Result<Response<Body>, Error> {
         }
     };
 
-    Ok(Response::builder()
+    // Build response with CORS headers
+    let mut response_builder = Response::builder()
         .status(StatusCode::OK)
-        .header("Content-Type", "application/json")
-        .body(json!(out).to_string().into())?)
-}
+        .header("Content-Type", "application/json");
 
+    // Only add CORS headers if origin is allowed
+    if !allowed_origin.is_empty() {
+        response_builder = response_builder
+            .header("Access-Control-Allow-Origin", allowed_origin)
+            .header("Access-Control-Allow-Methods", "GET, OPTIONS")
+            .header("Access-Control-Allow-Headers", "Content-Type")
+            .header("Access-Control-Max-Age", "86400"); // 24 hours
+    }
+
+    // Handle preflight OPTIONS request
+    if req.method() == "OPTIONS" {
+        return Ok(response_builder.body(Body::Empty)?);
+    }
+
+    Ok(response_builder.body(json!(out).to_string().into())?)
+}
 pub async fn current_song(
     username: &str,
     api_key: &str,
