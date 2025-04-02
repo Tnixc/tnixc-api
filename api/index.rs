@@ -1,4 +1,3 @@
-use serde_json::json;
 use vercel_runtime::{run, Body, Error, Request, Response, StatusCode};
 
 #[tokio::main]
@@ -10,11 +9,5 @@ pub async fn handler(_req: Request) -> Result<Response<Body>, Error> {
     Ok(Response::builder()
         .status(StatusCode::OK)
         .header("Content-Type", "application/json")
-        .body(
-            json!({
-              "message": "你好，世界"
-            })
-            .to_string()
-            .into(),
-        )?)
+        .body("Expecting something? https://tnixc.space".into())?)
 }
