@@ -1,20 +1,22 @@
 {
   "compilerOptions": {
+    "lib": ["ESNext"],
+    "module": "esnext",
+    "target": "esnext",
+    "moduleResolution": "bundler",
+    "moduleDetection": "force",
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
+    "composite": true,
     "strict": true,
+    "downlevelIteration": true,
+    "skipLibCheck": true,
     "jsx": "react-jsx",
-    "jsxImportSource": "hono/jsx",
-    "baseUrl": "./",
-    "module": "ESNext",
-    "moduleResolution": "Bundler",
-    "paths": {
-      "@/*": ["./src/*"]
-    },
-    "typeRoots": ["./node_modules/@types"],
-    "types": ["node"],
-    "outDir": "./dist",
-    "skipLibCheck": true
-  },
-  "tsc-alias": {
-    "resolveFullPaths": true
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "allowJs": true,
+    "types": [
+      "bun-types" // add Bun global
+    ]
   }
 }

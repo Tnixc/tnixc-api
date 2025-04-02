@@ -1,7 +1,0 @@
-{
-  "buildCommand": "bun run build",
-  "rewrites": [
-    { "source": "/public/:match*", "destination": "/:match*" },
-    { "source": "/(.*)", "destination": "/api" }
-  ]
-}
