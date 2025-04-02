@@ -16,7 +16,25 @@ pub struct Song {
 async fn main() -> Result<(), Error> {
     run(handler).await
 }
-
+/// This returns the current song being played according to last.fm, with the following format:
+/// ```
+/// {
+///   "artist": string,
+///   "image_url": string,
+///   "name": string,
+///   "now_playing": boolean
+/// }
+/// ```
+///
+/// Example response:
+/// ```
+/// {
+///     "artist": "Grant",
+///     "image_url": "https://lastfm.freetls.fastly.net/i/u/174s/bf9ad4665ed88573c7ff2d4081877c69.jpg",
+///     "name": "Dead Man Walking",
+///     "now_playing": false
+/// }
+/// ```
 pub async fn handler(req: Request) -> Result<Response<Body>, Error> {
     let api_key = match env::var("LAST_FM_API_KEY") {
         Ok(val) => val,
