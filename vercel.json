@@ -1,8 +1,13 @@
 {
-  "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "bun run build:vercel",
-  "rewrites": [
-    { "source": "/public/:match*", "destination": "/:match*" },
-    { "source": "/(.*)", "destination": "/api" }
+  "functions": {
+    "api/**/*.rs": {
+      "runtime": "vercel-rust@4.0.7"
+    }
+  },
+  "crons": [
+    {
+      "path": "/api/handler",
+      "schedule": "0 0 * * *"
+    }
   ]
 }
