@@ -104,11 +104,7 @@ pub async fn current_song(
             .as_str()
             .unwrap_or_default()
             .to_string(),
-        now_playing: if track["@attr"]["nowplaying"].as_str().unwrap_or_default() == "true" {
-            true
-        } else {
-            false
-        },
+        now_playing: track["@attr"]["nowplaying"].as_str().unwrap_or_default() == "true",
     };
 
     Ok(song)
