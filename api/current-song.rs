@@ -26,7 +26,7 @@ pub async fn handler(_req: Request) -> Result<Response<Body>, Error> {
     };
 
     let song = current_song("Tnixc", &api_key).await;
-    let out = match song{
+    let out = match song {
         Ok(v) => v,
         Err(e) => {
             eprintln!("Error in getting current-song: {e}");
