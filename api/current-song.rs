@@ -9,6 +9,7 @@ pub struct Song {
     pub name: String,
     pub artist: String,
     pub image_url: String,
+    pub now_playing: bool,
 }
 
 #[tokio::main]
@@ -72,6 +73,11 @@ pub async fn current_song(
             .as_str()
             .unwrap_or_default()
             .to_string(),
+        now_playing: if track["@attr"]["nowplaying"].as_str().unwrap_or_default() == "true" {
+            true
+        } else {
+            false
+        },
     };
 
     Ok(song)
