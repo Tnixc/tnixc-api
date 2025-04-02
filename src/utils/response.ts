@@ -11,7 +11,7 @@ type Response = {
 
 export async function okResponse(
   data: any,
-  message: string,
+  message: string = "No message provided",
   code: StatusCodeType = StatusCodes.OK,
 ) {
   let res: Response = {
@@ -26,7 +26,7 @@ export async function okResponse(
 }
 
 export async function errorResponse(
-  message: string,
+  message: string  = "No message provided",
   error: any,
   code: StatusCodeType = StatusCodes.BAD_REQUEST,
 ) {
@@ -42,7 +42,7 @@ export async function errorResponse(
 }
 
 export async function notFoundResponse(
-  message: string = "Data tidak ditemukan",
+  message: string = "No message provided",
   code: StatusCodeType = StatusCodes.NOT_FOUND,
 ) {
   let res: Response = {
@@ -56,7 +56,7 @@ export async function notFoundResponse(
 }
 
 export async function internalServerErrorResponse(
-  message: string = "Maaf, terjadi kesalahan pada server",
+  message: string = "Internal server error",
   error: any,
   code: StatusCodeType = StatusCodes.INTERNAL_SERVER_ERROR,
 ) {
