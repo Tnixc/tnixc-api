@@ -35,7 +35,7 @@ pub async fn handler(req: Request) -> Result<Response<Body>, Error> {
 
     // Check if origin is allowed
     let allowed_origin =
-        if origin.ends_with(".tnixc.space") || origin.starts_with("http://localhost") {
+        if origin.ends_with("tnixc.space") || origin.starts_with("http://localhost") {
             origin
         } else {
             // Default to deny if not from allowed origins
