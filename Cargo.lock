@@ -1296,19 +1296,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "rust-vercel"
-version = "0.1.0"
-dependencies = [
- "reqwest",
- "serde",
- "serde_json",
- "tokio",
- "utoipa",
- "utoipa-swagger-ui",
- "vercel_runtime",
-]
-
-[[package]]
 name = "rustc-demangle"
 version = "0.1.24"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1630,6 +1617,19 @@ checksum = "9117f5d4db391c1cf6927e7bea3db74b9a1c1add8f7eda9ffd5364f40f57b82f"
 dependencies = [
  "displaydoc",
  "zerovec",
+]
+
+[[package]]
+name = "tnixc-api"
+version = "0.1.0"
+dependencies = [
+ "reqwest",
+ "serde",
+ "serde_json",
+ "tokio",
+ "utoipa",
+ "utoipa-swagger-ui",
+ "vercel_runtime",
 ]
 
 [[package]]

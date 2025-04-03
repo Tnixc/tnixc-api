@@ -1,5 +1,5 @@
-use rust_vercel::Song; // Import from our library
 use serde_json::{json, Value};
+use tnixc_api::Song;
 use utoipa::OpenApi;
 use vercel_runtime::{run, Body, Error, Request, Response, StatusCode};
 
@@ -26,10 +26,10 @@ pub async fn handler(_req: Request) -> Result<Response<Body>, Error> {
     // Check if requesting OpenAPI JSON
     let mut value = json!(ApiDoc::openapi());
     value["openapi"] = Value::String("3.1.0".to_string());
-    return Ok(Response::builder()
+    Ok(Response::builder()
         .status(StatusCode::OK)
         .header("Content-Type", "application/json")
-        .body(value.to_string().into())?);
+        .body(value.to_string().into())?)
 }
 
 ////////////////////////////////////////

@@ -1,8 +1,9 @@
 [package]
-name = "rust-vercel"
-authors = ["katayama8000 <tattu.0310@gmail.com>"]
+name = "tnixc-api"
+authors = ["Tnixc <tnixxc@gmail.com>"]
 version = "0.1.0"
 edition = "2021"
+description = "my awesome api"
 
 [lib]
 path = "src/lib.rs"
