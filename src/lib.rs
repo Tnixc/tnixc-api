@@ -2,21 +2,15 @@ use serde::{Deserialize, Serialize};
 use utoipa::ToSchema;
 
 #[derive(Debug, Serialize, Deserialize, ToSchema)]
-#[schema(example = json!({
-    "artist": "Grant",
-    "image_url": "https://lastfm.freetls.fastly.net/i/u/174s/bf9ad4665ed88573c7ff2d4081877c69.jpg",
-    "name": "Dead Man Walking",
-    "now_playing": false
-}))]
 pub struct Song {
-    #[schema(example = "Grant")]
+    #[schema(example = "鷺巣詩郎")]
     pub name: String,
-    #[schema(example = "Dead Man Walking")]
+    #[schema(example = "Thanatos")]
     pub artist: String,
     #[schema(
-        example = "https://lastfm.freetls.fastly.net/i/u/174s/bf9ad4665ed88573c7ff2d4081877c69.jpg"
+        example = "https://lastfm.freetls.fastly.net/i/u/174s/c77d271d58305dcebadf5830fc5e0c7f.jpg"
     )]
     pub image_url: String,
-    #[schema(example = false)]
+    #[schema(example = true)]
     pub now_playing: bool,
 }
