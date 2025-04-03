@@ -7,7 +7,7 @@ use vercel_runtime::{run, Body, Error, Request, Response, StatusCode};
 #[openapi(
     paths(
         current_song_handler,
-        index
+        doc
     ),
     components(
         schemas(Song)
@@ -17,15 +17,6 @@ use vercel_runtime::{run, Body, Error, Request, Response, StatusCode};
     )
 )]
 struct ApiDoc;
-
-#[utoipa::path(
-    get,
-    path = "/doc-json",
-    tag = "Documentation",
-    responses(
-        (status = 200, description = "Swagger UI documentation in json", content_type = "text/json")
-    )
-)]
 #[tokio::main]
 async fn main() -> Result<(), Error> {
     run(handler).await
@@ -47,10 +38,10 @@ pub async fn handler(_req: Request) -> Result<Response<Body>, Error> {
 
 #[utoipa::path(
     get,
-    path = "/current-song",
+    path = "/api/current-song",
     tag = "Last.fm API",
     responses(
-        (status = 200, description = "Successfully retrieved current song", body = Song),
+        (status = 200, description = "Successfully retrieved current song", body = Song, content_type = "text/json"),
         (status = 500, description = "Server error")
     )
 )]
@@ -59,11 +50,11 @@ fn current_song_handler() {}
 
 #[utoipa::path(
     get,
-    path = "/index",
+    path = "/api/doc",
     tag = "Documentation",
     responses(
-        (status = 200, description = "Swagger UI documentation", content_type = "text/html")
+        (status = 200, description = "OpenAPI documentation", content_type = "text/json")
     )
 )]
 #[allow(dead_code)]
-fn index() {}
+fn doc() {}
