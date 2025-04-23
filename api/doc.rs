@@ -1,19 +1,21 @@
 use serde_json::{json, Value};
 use tnixc_api::Song;
-use utoipa::OpenApi;
+use utoipa::{IntoParams, OpenApi};
 use vercel_runtime::{run, Body, Error, Request, Response, StatusCode};
 
 #[derive(OpenApi)]
 #[openapi(
     paths(
         current_song_handler,
-        doc
+        message_handler,
+        doc,
     ),
     components(
-        schemas(Song)
+        schemas(Song),
     ),
     tags(
-        (name = "Last.fm API", description = "Last.fm song tracking endpoints for tnixc")
+        (name = "Last.fm API", description = "Last.fm song tracking endpoints for tnixc"),
+        (name = "Send me a message")
     )
 )]
 struct ApiDoc;
@@ -47,6 +49,25 @@ pub async fn handler(_req: Request) -> Result<Response<Body>, Error> {
 )]
 #[allow(dead_code)]
 fn current_song_handler() {}
+
+#[derive(IntoParams)]
+#[into_params(names("content", "contact"))]
+#[allow(dead_code)]
+struct Msg(String, Option<String>);
+
+#[utoipa::path(
+    get,
+    path = "/api/message",
+    tag = "Send me a message",
+    params(Msg),
+    responses(
+        (status = 200, description = "Successfully sent a message"),
+        (status = 200, description = "Successfully sent a message"),
+        (status = 500, description = "Server error")
+    ),
+)]
+#[allow(dead_code)]
+fn message_handler() {}
 
 #[utoipa::path(
     get,

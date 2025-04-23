@@ -16,6 +16,8 @@ reqwest = { version = "0.12.15", features = ["json"] }
 serde = "1.0.219"
 utoipa = "4.2.0"
 utoipa-swagger-ui = { version = "6.0.0", features = ["axum"] }
+serenity = { version = "0.12.4", features = ["model"] }
+url = "2.5.4"
 
 [[bin]]
 name = "doc"
@@ -24,3 +26,7 @@ path = "api/doc.rs"
 [[bin]]
 name = "current-song"
 path = "api/current-song.rs"
+
+[[bin]]
+name = "message"
+path = "api/message.rs"
