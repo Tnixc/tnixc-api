@@ -1,25 +1,27 @@
-# Tnixc's api
+# Tnixc's API
 
 An overly-complicated API built with Rust for stuff I want. This project runs as a Vercel serverless function. See [https://api.tnixc.space](https://api.tnixc.space) for docs.
 
-# Features
+## Features
 
 - Fetch current or most recently played song from Last.fm
+- Send messages to Discord via a bot
 - OpenAPI documentation using Scalar UI
 
-# Setup
+## Setup
 
-## Prerequisites
+### Prerequisites
 
 - Rust
 - Vercel CLI
 
-## Env
+### Environment Variables
 
-Put this in your `.env.local` in the root directory
+Put these in your `.env.local` in the root directory:
 
 ```
 LAST_FM_API_KEY=your_lastfm_api_key
+DISCORD_TOKEN=your_discord_bot_token
 ```
 
 ```

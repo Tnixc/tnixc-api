@@ -2,8 +2,7 @@ use serenity::all::Http;
 use serenity::builder::{CreateEmbed, CreateMessage};
 use serenity::model::id::ChannelId;
 use std::collections::HashMap;
-use std::{env, process};
-use url;
+use std::env;
 use vercel_runtime::{run, Body, Error, Request, Response, StatusCode};
 
 const CHANNEL_ID: u64 = 1364716034967470110;
@@ -18,7 +17,9 @@ pub async fn handler(req: Request) -> Result<Response<Body>, Error> {
         Ok(val) => val,
         Err(e) => {
             eprintln!("Could not find env var 'DISCORD_TOKEN': {e}");
-            process::exit(1)
+            return Ok(Response::builder()
+                .status(StatusCode::INTERNAL_SERVER_ERROR)
+                .body("Server configuration error".into())?);
         }
     };
 
@@ -39,9 +40,7 @@ pub async fn handler(req: Request) -> Result<Response<Body>, Error> {
         };
 
     // Build response with CORS headers
-    let mut response_builder = Response::builder()
-        .status(StatusCode::OK)
-        .header("Content-Type", "application/json");
+    let mut response_builder = Response::builder().header("Content-Type", "application/json");
 
     // Only add CORS headers if origin is allowed
     if !allowed_origin.is_empty() {
@@ -54,8 +53,10 @@ pub async fn handler(req: Request) -> Result<Response<Body>, Error> {
 
     // Handle preflight OPTIONS request
     if req.method() == "OPTIONS" {
-        return Ok(response_builder.body(Body::Empty)?);
+        return Ok(response_builder.status(StatusCode::OK).body(Body::Empty)?);
     }
+
+    // Parse query parameters
     let query_params = req
         .uri()
         .query()
@@ -64,32 +65,37 @@ pub async fn handler(req: Request) -> Result<Response<Body>, Error> {
                 .into_owned()
                 .collect::<HashMap<String, String>>()
         })
-        .unwrap_or_else(HashMap::new);
+        .unwrap_or_default();
 
-    println!("QUERY_PARAMS: {:#?}", query_params);
-    if query_params.get("content").is_none() {
+    // Validate required parameters
+    if !query_params.contains_key("content") {
         return Ok(response_builder
-            .status(400)
+            .status(StatusCode::BAD_REQUEST)
             .body("Missing 'content' parameter".to_string().into())?);
     }
+
+    // Send message to Discord
     let res = discord_say(
         query_params.get("content"),
         query_params.get("contact"),
         &token,
     )
     .await;
-    println!("DISCORD_RESPONSE: {:#?}", res);
+
     match res {
-        Ok(_) => {
-            return Ok(response_builder
-                .status(200)
-                .body("Success".to_string().into())?);
-        }
+        Ok(_) => Ok(response_builder
+            .status(StatusCode::OK)
+            .body(r#"{"status":"success","message":"Message sent to Discord"}"#.into())?),
         Err(e) => {
             eprintln!("Error in sending discord message: {e}");
-            return Err(e.into());
+            Ok(response_builder
+                .status(StatusCode::INTERNAL_SERVER_ERROR)
+                .body(
+                    format!(r#"{{"status":"error","message":"Failed to send message: {e}"}}"#)
+                        .into(),
+                )?)
         }
-    };
+    }
 }
 
 pub async fn discord_say(
@@ -116,6 +122,6 @@ pub async fn discord_say(
         .color((36, 99, 235)); // rgb(36, 99, 235)
     let builder = CreateMessage::new().embed(embed);
     let http = Http::new(token);
-    let r = channel_id.send_message(&http, builder).await;
-    return r;
+
+    channel_id.send_message(&http, builder).await
 }
