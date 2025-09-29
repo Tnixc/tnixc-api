@@ -1,6 +1,6 @@
 # Tnixc's API
 
-An overly-complicated API built with Rust for stuff I want. This project runs as a Vercel serverless function. See [https://api.tnixc.space](https://api.tnixc.space) for docs.
+An overly-complicated API built with Rust for stuff I want. This project runs as a Vercel serverless function. See [https://api.enochlau.com](https://api.enochlau.com) for docs.
 
 ## Features
 
